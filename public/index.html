@@ -1741,58 +1741,125 @@
         <!-- Slide 3 - Microphone Showcase -->
         <section class="slide" id="microphone-showcase" style="height: 150vh; position: relative; pointer-events: none; overflow: visible;">
             <!-- Vector microphone — handheld, lying diagonally, cable plugs into the butt -->
-            <div id="hanging-mic" style="position: absolute; left: 73%; top: 50%; transform: translate(-50%, -50%) rotate(30deg); transform-origin: 50% 50%; width: min(380px, 48vw); opacity: 0; pointer-events: none; z-index: 14;">
-                <svg id="hanging-mic-svg" viewBox="0 0 160 440" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block; transform-origin: 50% 99%; filter: drop-shadow(0 18px 30px rgba(0,0,0,0.75));">
+            <div id="hanging-mic" style="position: absolute; left: 71%; top: 50%; transform: translate(-50%, -50%) rotate(27deg); transform-origin: 50% 50%; width: min(266px, 38vw); opacity: 0; pointer-events: none; z-index: 14;">
+                <svg id="hanging-mic-svg" viewBox="0 0 160 440" xmlns="http://www.w3.org/2000/svg" style="width:100%; height:auto; display:block; transform-origin: 50% 99%; filter: drop-shadow(0 20px 34px rgba(0,0,0,0.85));">
                     <defs>
                         <linearGradient id="mic-barrel" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#0e0e10" />
-                            <stop offset="22%" stop-color="#3a3a42" />
-                            <stop offset="42%" stop-color="#5a5a64" />
-                            <stop offset="58%" stop-color="#2c2c32" />
-                            <stop offset="100%" stop-color="#08080a" />
+                            <stop offset="0%" stop-color="#08080a" />
+                            <stop offset="20%" stop-color="#2e2e36" />
+                            <stop offset="44%" stop-color="#52525c" />
+                            <stop offset="60%" stop-color="#23232a" />
+                            <stop offset="100%" stop-color="#050507" />
                         </linearGradient>
                         <linearGradient id="mic-chrome" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" stop-color="#6a6a72" />
-                            <stop offset="40%" stop-color="#e6e6ea" />
-                            <stop offset="60%" stop-color="#9a9aa2" />
-                            <stop offset="100%" stop-color="#3a3a40" />
+                            <stop offset="0%" stop-color="#3c3c42" />
+                            <stop offset="38%" stop-color="#cfcfd5" />
+                            <stop offset="56%" stop-color="#7e7e86" />
+                            <stop offset="100%" stop-color="#23232a" />
                         </linearGradient>
-                        <radialGradient id="mic-ball" cx="36%" cy="30%" r="78%">
-                            <stop offset="0%" stop-color="#5c5c66" />
-                            <stop offset="45%" stop-color="#2e2e34" />
-                            <stop offset="100%" stop-color="#08080a" />
+                        <radialGradient id="mic-ball" cx="34%" cy="28%" r="82%">
+                            <stop offset="0%" stop-color="#4c4c56" />
+                            <stop offset="46%" stop-color="#23232a" />
+                            <stop offset="100%" stop-color="#040406" />
                         </radialGradient>
-                        <pattern id="mic-mesh" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
-                            <circle cx="2" cy="2" r="1.5" fill="rgba(0,0,0,0.5)" />
-                            <circle cx="6" cy="6" r="1.5" fill="rgba(0,0,0,0.5)" />
+                        <radialGradient id="mic-rust" cx="50%" cy="40%" r="60%">
+                            <stop offset="0%" stop-color="#9a4e1e" stop-opacity="0.7" />
+                            <stop offset="55%" stop-color="#5e2f12" stop-opacity="0.45" />
+                            <stop offset="100%" stop-color="#3a1c0c" stop-opacity="0" />
+                        </radialGradient>
+                        <pattern id="mic-mesh" width="7" height="7" patternUnits="userSpaceOnUse">
+                            <rect width="7" height="7" fill="rgba(0,0,0,0)" />
+                            <circle cx="1.6" cy="1.6" r="1.45" fill="rgba(0,0,0,0.55)" />
+                            <circle cx="5.1" cy="5.1" r="1.45" fill="rgba(0,0,0,0.55)" />
+                            <circle cx="5.1" cy="1.6" r="0.7" fill="rgba(255,255,255,0.05)" />
                         </pattern>
+                        <!-- grime: fractal-noise speckle used as a dirty overlay -->
+                        <filter id="mic-grime" x="-10%" y="-10%" width="120%" height="120%">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.16 0.21" numOctaves="3" seed="11" result="n" />
+                            <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.85 0" />
+                        </filter>
+                        <!-- rough: distorts edges so outlines look chipped/worn -->
+                        <filter id="mic-rough">
+                            <feTurbulence type="fractalNoise" baseFrequency="0.04 0.07" numOctaves="2" seed="4" result="t" />
+                            <feDisplacementMap in="SourceGraphic" in2="t" scale="3.4" xChannelSelector="R" yChannelSelector="G" />
+                        </filter>
                         <clipPath id="mic-ballclip"><circle cx="80" cy="88" r="66" /></clipPath>
+                        <clipPath id="mic-bodyclip"><path d="M 48 164 L 112 164 L 102 360 L 58 360 Z" /></clipPath>
                     </defs>
-                    <!-- ===== BALL GRILLE (head, at the TOP) ===== -->
-                    <circle cx="80" cy="88" r="66" fill="url(#mic-ball)" stroke="#15151a" stroke-width="3" />
-                    <g clip-path="url(#mic-ballclip)"><rect x="12" y="20" width="136" height="136" fill="url(#mic-mesh)" /></g>
-                    <g clip-path="url(#mic-ballclip)" fill="none">
-                        <circle cx="80" cy="88" r="52" stroke="rgba(0,0,0,0.35)" stroke-width="1" />
-                        <circle cx="80" cy="88" r="36" stroke="rgba(0,0,0,0.3)" stroke-width="1" />
+
+                    <!-- ===== BODY (drawn first, grille overlaps its top) ===== -->
+                    <path d="M 48 164 L 112 164 L 102 360 L 58 360 Z" fill="url(#mic-barrel)" stroke="#000" stroke-width="1.8" filter="url(#mic-rough)" />
+                    <g clip-path="url(#mic-bodyclip)">
+                        <!-- specular streak -->
+                        <path d="M 69 168 L 76 168 L 70 356 L 65 356 Z" fill="rgba(255,255,255,0.13)" />
+                        <!-- rust / corrosion patches -->
+                        <ellipse cx="58" cy="250" rx="16" ry="34" fill="url(#mic-rust)" />
+                        <ellipse cx="100" cy="320" rx="13" ry="26" fill="url(#mic-rust)" />
+                        <ellipse cx="92" cy="195" rx="9" ry="16" fill="url(#mic-rust)" opacity="0.8" />
+                        <!-- gaffer-tape band wrapped round the barrel -->
+                        <g transform="rotate(-3 80 232)">
+                            <rect x="46" y="214" width="68" height="34" fill="#43423b" stroke="#262520" stroke-width="1" />
+                            <rect x="46" y="214" width="68" height="34" fill="url(#mic-rust)" opacity="0.25" />
+                            <path d="M 46 214 L 114 216 M 46 226 L 114 224 M 46 238 L 114 240" stroke="rgba(0,0,0,0.3)" stroke-width="0.8" fill="none" />
+                            <!-- frayed/torn tape edges -->
+                            <path d="M 46 214 l 5 -3 l 4 3 l 5 -2 l 6 2 l 5 -3 l 6 3 l 6 -2 l 6 2 l 5 -3 l 6 3 l 4 -2" fill="#43423b" stroke="#262520" stroke-width="0.6" />
+                            <!-- acid stencil writing on the tape -->
+                            <text x="80" y="236" font-family="Arial Black, Arial, sans-serif" font-size="13" font-weight="900" fill="#b4e019" text-anchor="middle" letter-spacing="1" opacity="0.92">GB-57</text>
+                        </g>
+                        <!-- scratches -->
+                        <path d="M 60 180 L 84 300 M 96 200 L 78 280 M 54 300 L 100 340" stroke="rgba(255,255,255,0.10)" stroke-width="0.8" fill="none" />
+                        <path d="M 70 188 L 92 250 M 58 330 L 96 352" stroke="rgba(0,0,0,0.45)" stroke-width="1" fill="none" />
+                        <!-- grime overlay -->
+                        <rect x="44" y="160" width="74" height="206" filter="url(#mic-grime)" opacity="0.32" />
                     </g>
-                    <ellipse cx="60" cy="64" rx="20" ry="14" fill="rgba(255,255,255,0.10)" />
-                    <circle cx="80" cy="88" r="66" fill="none" stroke="rgba(180,224,25,0.18)" stroke-width="2" />
-                    <!-- chrome collar below grille -->
-                    <rect x="44" y="150" width="72" height="16" rx="5" fill="url(#mic-chrome)" stroke="#1a1a1d" stroke-width="1.5" />
-                    <!-- body, tapering toward the butt -->
-                    <path d="M 48 164 L 112 164 L 102 360 L 58 360 Z" fill="url(#mic-barrel)" stroke="#000" stroke-width="1.8" />
-                    <path d="M 70 170 L 76 170 L 70 354 L 65 354 Z" fill="rgba(255,255,255,0.12)" />
-                    <!-- XLR butt -->
-                    <rect x="58" y="358" width="44" height="40" rx="6" fill="url(#mic-barrel)" stroke="#000" stroke-width="1.5" />
-                    <!-- acid status ring -->
-                    <rect x="58" y="372" width="44" height="5" fill="#b4e019" opacity="0.9" />
-                    <!-- connector cap + strain relief where the cable plugs in -->
-                    <rect x="64" y="396" width="32" height="16" rx="4" fill="url(#mic-chrome)" stroke="#1a1a1d" stroke-width="1.4" />
-                    <path d="M 72 412 Q 80 426 88 412 L 88 432 L 72 432 Z" fill="#0c0c0d" stroke="#444" stroke-width="1.2" />
-                    <circle id="mic-cable-entry" cx="80" cy="434" r="2" fill="none" />
+
+                    <!-- ===== CHROME COLLAR ===== -->
+                    <rect x="44" y="150" width="72" height="16" rx="5" fill="url(#mic-chrome)" stroke="#15151a" stroke-width="1.5" />
+                    <rect x="44" y="150" width="72" height="16" rx="5" fill="url(#mic-rust)" opacity="0.3" />
+                    <path d="M 47 154 L 113 154 M 47 162 L 113 162" stroke="rgba(0,0,0,0.35)" stroke-width="0.7" />
+                    <circle cx="52" cy="158" r="1.6" fill="#1a1a1d" /><circle cx="108" cy="158" r="1.6" fill="#1a1a1d" />
+
+                    <!-- ===== BALL GRILLE (head, at TOP) ===== -->
+                    <circle cx="80" cy="88" r="66" fill="url(#mic-ball)" stroke="#101015" stroke-width="3" filter="url(#mic-rough)" />
+                    <g clip-path="url(#mic-ballclip)">
+                        <rect x="10" y="18" width="140" height="140" fill="url(#mic-mesh)" />
+                        <circle cx="80" cy="88" r="52" stroke="rgba(0,0,0,0.4)" stroke-width="1" fill="none" />
+                        <circle cx="80" cy="88" r="36" stroke="rgba(0,0,0,0.32)" stroke-width="1" fill="none" />
+                        <!-- worn specular highlight -->
+                        <ellipse cx="58" cy="62" rx="22" ry="15" fill="rgba(255,255,255,0.12)" />
+                        <!-- grime + dents on the grille -->
+                        <rect x="14" y="22" width="132" height="132" filter="url(#mic-grime)" opacity="0.4" />
+                        <ellipse cx="104" cy="112" rx="16" ry="12" fill="rgba(0,0,0,0.4)" />
+                        <ellipse cx="92" cy="50" rx="10" ry="7" fill="rgba(0,0,0,0.3)" />
+                        <!-- a dent / chip on the rim -->
+                        <path d="M 132 70 q -10 8 -4 20 q 10 -2 8 -18 z" fill="rgba(0,0,0,0.5)" />
+                    </g>
+                    <!-- worn acid rim (partial, chipped) -->
+                    <path d="M 24 70 A 66 66 0 0 1 120 34" fill="none" stroke="rgba(180,224,25,0.35)" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="34 8 18 6 26" />
+
+                    <!-- ===== XLR BUTT ===== -->
+                    <rect x="58" y="358" width="44" height="40" rx="6" fill="url(#mic-barrel)" stroke="#000" stroke-width="1.5" filter="url(#mic-rough)" />
+                    <rect x="58" y="358" width="44" height="40" rx="6" fill="url(#mic-rust)" opacity="0.35" clip-path="url(#mic-ballclip)" />
+                    <ellipse cx="86" cy="384" rx="9" ry="20" fill="url(#mic-rust)" opacity="0.55" />
+                    <!-- dirty acid status ring -->
+                    <rect x="58" y="372" width="44" height="5" fill="#b4e019" opacity="0.85" />
+                    <rect x="58" y="372" width="44" height="5" fill="rgba(0,0,0,0.5)" filter="url(#mic-grime)" />
+                    <circle cx="64" cy="364" r="1.6" fill="#0c0c0d" /><circle cx="96" cy="364" r="1.6" fill="#0c0c0d" />
+
+                    <!-- ===== CONNECTOR CAP + STRAIN RELIEF (cable plugs in HERE) ===== -->
+                    <rect x="62" y="396" width="36" height="16" rx="4" fill="url(#mic-chrome)" stroke="#15151a" stroke-width="1.4" />
+                    <rect x="62" y="396" width="36" height="16" rx="4" fill="rgba(0,0,0,0.4)" filter="url(#mic-grime)" />
+                    <!-- rubber strain-relief boot the cable plugs into -->
+                    <path d="M 67 410 Q 80 423 93 410 L 96 437 Q 80 445 64 437 Z" fill="#1c1c20" stroke="#000" stroke-width="1.5" />
+                    <path d="M 70 412 Q 80 420 90 412" stroke="rgba(255,255,255,0.14)" stroke-width="1.1" fill="none" />
+                    <path d="M 65 419 Q 80 426 95 419 M 64 427 Q 80 434 96 427 M 65 435 Q 80 442 95 435" stroke="rgba(0,0,0,0.7)" stroke-width="1.1" fill="none" />
+                    <ellipse cx="80" cy="440" rx="7" ry="3" fill="#050506" />
+                    <!-- axis reference (up the centreline) so the cable can plug in dead-straight -->
+                    <circle id="mic-axis-ref" cx="80" cy="150" r="0.01" fill="none" />
+                    <circle id="mic-cable-entry" cx="80" cy="440" r="2" fill="none" />
                 </svg>
             </div>
-            <div id="microphone-label" class="glass-label" style="left: 50%; top: 34%; transform: rotate(-1.5deg);">
+            <div id="microphone-label" class="glass-label" style="left: 15%; top: 41%; transform: rotate(-2deg);">
                 <div class="glass-label-number">50+</div>
                 <div class="glass-label-text">артистов в работе</div>
             </div>
@@ -2168,10 +2235,23 @@
                 }
             }
 
-            // Gentle serpentine waypoints (x = fraction of width).
+            // Direction of the mic's connector axis (so the cable plugs in dead-straight,
+            // not at a crooked angle). Outward unit vector from the body to the boot tip.
+            let ax = endX, ay = endY - 120;          // sensible fallback (straight up)
+            const axisRef = document.getElementById('mic-axis-ref');
+            if (axisRef) {
+                const ar = axisRef.getBoundingClientRect();
+                ax = ar.left + ar.width / 2 + window.scrollX;
+                ay = ar.top + ar.height / 2 + window.scrollY;
+            }
+            let dx = endX - ax, dy = endY - ay;
+            const dl = Math.hypot(dx, dy) || 1; dx /= dl; dy /= dl;   // outward along boot
+
+            // Gentle serpentine waypoints (x = fraction of width). The last column is
+            // pulled onto the boot axis so the cable lines up with the connector.
             const span = endY - sy;
-            const cols = w < 768 ? [0.34, 0.64, 0.36, 0.6, 0.5]
-                                 : [0.30, 0.66, 0.28, 0.62, 0.42];
+            const cols = w < 768 ? [0.34, 0.64, 0.46, 0.40]
+                                 : [0.30, 0.66, 0.46, 0.40];
             const pts = [[sx, sy]];
             // leave the guitar jack going straight DOWN first, so the cable clearly
             // plugs into the guitar instead of disappearing behind its body
@@ -2179,12 +2259,14 @@
             const yStart = sy + span * 0.14;
             cols.forEach((cx, i) => {
                 const t = i / (cols.length - 1);
-                pts.push([w * cx, yStart + (endY - yStart) * t * 0.9]);
+                pts.push([w * cx, yStart + (endY - yStart) * t * 0.74]);
             });
-            // clean straight vertical plug-in to the mic connector
-            pts.push([endX, endY - 80]);
-            pts.push([endX, endY - 32]);
-            pts.push([endX, endY + 4]);
+            // Wide, gentle sweep into the connector: a big-radius curve (no sharp kink)
+            // that still finishes COLLINEAR with the boot axis → straight plug-in.
+            pts.push([endX - 168, endY + 38]);          // low point of the wide arc (left)
+            pts.push([endX + dx * 96,  endY + dy * 96]); // easing onto the boot axis
+            pts.push([endX + dx * 40,  endY + dy * 40]);
+            pts.push([endX - dx * 10,  endY - dy * 10]); // into the boot, dead-straight
 
             const d = smoothPath(pts);
             ['guitar-cable-aura', 'guitar-cable-outer', 'guitar-cable-inner', 'guitar-cable-pulse']
@@ -2893,8 +2975,11 @@
         (function placeStickLabels() {
             const a = document.getElementById('drumstick-label-10');
             const b = document.getElementById('drumstick-label-8');
-            if (a) { a.style.left = '46%'; a.style.top = '34%'; a.style.transform = 'translate(-50%,-50%)'; }
-            if (b) { b.style.left = '46%'; b.style.top = '34%'; b.style.transform = 'translate(-50%,-50%)'; }
+            // Sit each label cleanly ABOVE the stick shaft at the angle it appears
+            // (label-10 at 10°, label-8 at 3°) so the stick never pierces the box and
+            // the glowing tip stays clear to the left.
+            if (a) { a.style.left = '56%'; a.style.top = '31%'; a.style.transform = 'translate(-50%,-50%)'; }
+            if (b) { b.style.left = '54%'; b.style.top = '40%'; b.style.transform = 'translate(-50%,-50%)'; }
         })();
 
         // ----------------------------------------------------
